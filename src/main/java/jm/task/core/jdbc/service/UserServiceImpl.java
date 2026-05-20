@@ -1,31 +1,28 @@
 package jm.task.core.jdbc.service;
 
+import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 
 import java.util.List;
 
+// класс для того, чтобы брать метод и перенаправлять вызов в JDBC-класс
 public class UserServiceImpl implements UserService {
-    public void createUsersTable() {
 
-    }
+    // поле для работы с JDBC
+    private final UserDao userDao = new UserDaoJDBCImpl();
 
-    public void dropUsersTable() {
+    public void createUsersTable() { userDao.createUsersTable(); }
 
-    }
+    public void dropUsersTable() { userDao.dropUsersTable(); }
 
-    public void saveUser(String name, String lastName, byte age) {
+    public void saveUser(String name, String lastName, byte age) { userDao.saveUser(name, lastName, age); }
 
-    }
-
-    public void removeUserById(long id) {
-
-    }
+    public void removeUserById(long id) { userDao.removeUserById(id); }
 
     public List<User> getAllUsers() {
-        return null;
+        return userDao.getAllUsers();
     }
 
-    public void cleanUsersTable() {
-
-    }
+    public void cleanUsersTable() { userDao.cleanUsersTable(); }
 }
