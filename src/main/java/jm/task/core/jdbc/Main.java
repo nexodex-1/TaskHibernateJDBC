@@ -5,6 +5,8 @@ import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
+import jm.task.core.jdbc.util.Util;
+
 import java.util.List;
 
 @Slf4j
@@ -29,7 +31,7 @@ public class Main {
             userService.cleanUsersTable();
             userService.dropUsersTable();
         } finally {
-            jm.task.core.jdbc.util.Util.closeSessionFactory();
+            Util.closeSessionFactory();
         }
     }
 }
