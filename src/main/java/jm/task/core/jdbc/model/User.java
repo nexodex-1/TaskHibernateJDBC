@@ -1,26 +1,38 @@
 package jm.task.core.jdbc.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Entity;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table
+import lombok.experimental.FieldDefaults;
+import lombok.AccessLevel;
+
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    Long id;
 
-    @Column
-    private String name;
+    @Column(name = "name", nullable = false, length = 50)
+    String name;
 
-    @Column
-    private String lastName;
+    @Column(name = "lastName", nullable = false, length = 50)
+    String lastName;
 
-    @Column
-    private Byte age;
-
-    public User() {
-
-    }
+    @Column(name = "age", nullable = false)
+    Byte age;
 
     public User(String name, String lastName, Byte age) {
         this.name = name;
@@ -28,35 +40,9 @@ public class User {
         this.age = age;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Byte getAge() {
-        return age;
-    }
-
-    public void setAge(Byte age) {
-        this.age = age;
+    @Override
+    public String toString() {
+        return String.format("ID: %-1d | Имя: %-10s | Фамилия: %-12s | Возраст: %d",
+                id, name, lastName, age);
     }
 }
